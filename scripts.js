@@ -129,4 +129,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Add fade-out transition on navigation
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const targetUrl = this.href;
+            document.body.classList.remove('loaded'); // Start fade-out
+            setTimeout(() => {
+                window.location.href = targetUrl; // Navigate after fade-out
+            }, 500); // Duration of the fade-out effect
+        });
+    });
+
+    // Apply loaded class to trigger fade-in effect
+    window.addEventListener('load', () => {
+        document.body.classList.add('loaded');
+    });
 });

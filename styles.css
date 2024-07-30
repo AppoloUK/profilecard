@@ -14,7 +14,14 @@ body {
     color: #f0f0f0;
     overflow-x: hidden; /* Prevent horizontal scroll */
     position: relative;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
+
+body.loaded {
+    opacity: 1;
+}
+
 
 .navbar {
     width: 100%;
@@ -67,6 +74,23 @@ body {
     min-height: 100vh;
     padding: 50px 20px;
     z-index: 1; /* Ensure content is above canvas */
+}
+
+.nav-links a {
+    color: #f0f0f0;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links a:hover {
+    background-color: #444;
+    color: #fff;
 }
 
 .hidden {
