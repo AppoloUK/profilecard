@@ -3,42 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Developer Profile Card</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <!-- Open Graph meta tags for rich link previews -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.appolo.xyz/">
-    <meta property="og:title" content="Appolo's Developer Profile">
-    <meta property="og:description" content="Check out my portfolio!">
-    <meta property="og:image" content="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/9c865e01-556d-4043-a78a-ab6d305c0929/ddpqqno-64f871f3-da5a-4639-ba4c-1e6883fcd469.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzljODY1ZTAxLTU1NmQtNDA0My1hNzhhLWFiNmQzMDVjMDkyOVwvZGRwcXFuby02NGY4NzFmMy1kYTVhLTQ2MzktYmE0Yy0xZTY4ODNmY2Q0NjkuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.qNVkemeG8krVA99BPS25NuTBB2l6CFMS2TaIWnuE-1E">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    <title>Apollo | Developer Portfolio</title>
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+    <!-- Your Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- ===== SCANLINE OVERLAY (Optional - fits B&W too) ===== -->
+    <!-- <div class="scanline-overlay"></div> -->
+    <!-- APOLLO: Uncomment the above line if you still want the subtle scanline effect -->
+
+    <!-- ===== NAVIGATION BAR ===== -->
     <nav class="navbar">
-        <ul class="nav-links">
-            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
-            <li><a href="projects.html"><i class="fas fa-project-diagram"></i> Projects</a></li>
-            <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
-        </ul>
-    </nav>
-    <div id="home" class="content-section">
-        <div class="profile-card">
-            <img src="pfp.jpg" alt="Profile Picture" class="profile-pic">
-            <h2 class="username">Appolo</h2>
-            <p class="bio">just some guy who likes programming</p>
-            <p class="current-time" id="time"></p>
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">Apollo</a>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <!-- Mobile Menu Button (Optional Enhancement - Simple version for now) -->
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                 <span class="hamburger"></span>
+            </button>
         </div>
-    </div>
-    <canvas id="particleCanvas"></canvas>
-    <div class="slider-container">
-        <input type="range" min="1" max="10" value="5" class="slider" id="speedSlider">
-        <label for="speedSlider" class="slider-label">Speed</label>
-    </div>
-    <script src="scripts.js"></script>
+    </nav>
+
+    <main class="content-wrapper">
+
+        <!-- ===== HERO SECTION ===== -->
+        <section id="hero">
+            <div class="hero-content">
+                <!-- ADDED: Profile Picture -->
+                <img src="profile.png" alt="Apollo's Profile Picture" class="profile-picture">
+                <!-- END ADDED -->
+                <h1 class="headline" data-splitting>Apollo</h1>
+                <p class="tagline">infinite games but no games</p>
+                <!-- REMOVED Scroll Indicator (Less necessary with Navbar) -->
+                <!-- <div class="scroll-indicator"> ... </div> -->
+            </div>
+             <!-- ADDED: Simple scroll down hint if needed -->
+             <a href="#about" class="hero-scroll-down" aria-label="Scroll down to about section">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 5V19M12 19L18 13M12 19L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </a>
+        </section>
+
+        <!-- ===== ABOUT SECTION ===== -->
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <p class="about-text">
+                Heyo! I'm Apollo and i'm from Poland. I like making games and coding stuff. Hope we can make something cool :P
+            </p>
+        </section>
+
+        <!-- ===== SKILLS SECTION ===== -->
+        <section id="skills">
+            <h2 class="section-title">My Toolkit</h2>
+            <div class="skills-grid">
+                 <!-- Skill Item: Lua -->
+                <div class="skill-item reveal-fade-up">
+                     <!-- UPDATED Icon Source/Style for B&W -->
+                    <img src="https://img.icons8.com/ios-filled/100/ffffff/lua-language.png" alt="Lua Icon" class="skill-icon"/>
+                    <span class="skill-name">Lua</span>
+                </div>
+                <!-- Skill Item: Python -->
+                <div class="skill-item reveal-fade-up">
+                     <img src="https://img.icons8.com/ios-filled/100/ffffff/python.png" alt="Python Icon" class="skill-icon"/>
+                    <span class="skill-name">Python</span>
+                </div>
+                 <!-- Skill Item: HTML -->
+                <div class="skill-item reveal-fade-up">
+                    <img src="https://img.icons8.com/ios-filled/100/ffffff/html-5.png" alt="HTML5 Icon" class="skill-icon"/>
+                    <span class="skill-name">HTML</span>
+                </div>
+                 <!-- Skill Item: CSS -->
+                <div class="skill-item reveal-fade-up">
+                     <img src="https://img.icons8.com/ios-filled/100/ffffff/css3.png" alt="CSS3 Icon" class="skill-icon"/>
+                    <span class="skill-name">CSS</span>
+                </div>
+                <!-- Skill Item: JavaScript -->
+                <div class="skill-item reveal-fade-up">
+                     <img src="https://img.icons8.com/ios-filled/100/ffffff/javascript.png" alt="JavaScript Icon" class="skill-icon"/>
+                    <span class="skill-name">JavaScript</span>
+                </div>
+                 <!-- Skill Item: C# -->
+                <div class="skill-item reveal-fade-up">
+                     <img src="https://img.icons8.com/ios-filled/100/ffffff/c-sharp-logo.png" alt="C# Icon" class="skill-icon"/>
+                    <span class="skill-name">C#</span>
+                </div>
+                 <!-- NOTE: Changed icon color in URL to ffffff (white). You might need different icons or apply CSS filter: invert(1); if needed. -->
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <h2 class="section-title">Project Showcase</h2>
+            <div class="swiper portfolio-slider reveal-fade-up">
+                <div class="swiper-wrapper">
+
+                    <!-- Project 1: Maze Generator -->
+                    <div class="swiper-slide">
+                        <div class="portfolio-item">
+                            <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/ULdcywxUb48" title="YouTube video player: Maze Generator" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <h3 class="portfolio-title">Maze Generator</h3>
+                            <p class="portfolio-description">A maze generator created using the recursive backtracking algorithm.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Project Pausebreak -->
+                    <div class="swiper-slide">
+                        <div class="portfolio-item">
+                             <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/ZkVCstrilN4" title="YouTube video player: Project Pausebreak" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <h3 class="portfolio-title">Project Pausebreak</h3>
+                            <p class="portfolio-description">A horror game concept featuring an ASCII-based renderer.</p>
+                        </div>
+                    </div>
+
+                     <!-- Project 3: SCP-173 Showcase -->
+                     <div class="swiper-slide">
+                        <div class="portfolio-item">
+                             <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/GqDElLJN07M" title="YouTube video player: SCP-173 Showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <h3 class="portfolio-title">SCP-173 Showcase</h3>
+                            <p class="portfolio-description">Showcasing a recreation or interaction with SCP-173.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Emote Wheel -->
+                     <div class="swiper-slide">
+                        <div class="portfolio-item">
+                             <div class="video-container">
+                                <iframe src="https://www.youtube.com/embed/xhf4NHvKJbw" title="YouTube video player: Emote Wheel" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <h3 class="portfolio-title">Emote Wheel</h3>
+                            <p class="portfolio-description">An interactive emote wheel implementation.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 5: RTS System (NEW) -->
+                     <div class="swiper-slide">
+                        <div class="portfolio-item">
+                             <div class="video-container">
+                                <!-- Video ID: u-3nMEwAiRY -->
+                                <iframe src="https://www.youtube.com/embed/u-3nMEwAiRY" title="YouTube video player: RTS System" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <h3 class="portfolio-title">RTS System</h3>
+                            <p class="portfolio-description">Real-time strategy features like unit selection and formations.</p>
+                        </div>
+                    </div>
+
+                    <!-- Project 6: Simple Building System (NEW) -->
+                     <div class="swiper-slide">
+                        <div class="portfolio-item">
+                             <div class="video-container">
+                                <!-- Video ID: 7N83ip6adX4 -->
+                                <iframe src="https://www.youtube.com/embed/7N83ip6adX4" title="YouTube video player: Simple Building System" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                            </div>
+                            <h3 class="portfolio-title">Simple Building System</h3>
+                            <p class="portfolio-description">Demonstration of a basic in-game building system.</p>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Swiper Controls -->
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </section>
+
+        <!-- ===== CONTACT SECTION ===== -->
+        <section id="contact">
+             <h2 class="section-title">Connect With Me</h2>
+             <div class="contact-links">
+                 <a href="https://discordapp.com/users/apollo_ok" target="_blank" class="contact-link reveal-fade-up">
+                     <!-- UPDATED Icon for B&W -->
+                     <img src="https://img.icons8.com/ios-filled/50/ffffff/discord-logo.png" alt="Discord Logo" class="contact-icon"/>
+                     <span>apollo_ok</span>
+                 </a>
+                 <!-- APOLLO: Replace USER_ID_PLACEHOLDER with your Roblox ID -->
+                 <a href="https://www.roblox.com/users/USER_ID_PLACEHOLDER/profile" target="_blank" class="contact-link reveal-fade-up">
+                     <!-- UPDATED Icon for B&W -->
+                    <img src="https://img.icons8.com/ios-filled/50/ffffff/roblox.png" alt="Roblox Logo" class="contact-icon"/>
+                     <span>x8yv (Roblox Profile)</span>
+                 </a>
+             </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <p>© <span id="year"></span> Apollo. Crafted with Vanilla JS.</p>
+        <!-- Removed heart for cleaner B&W look, can be added back -->
+    </footer>
+
+    <!-- JavaScript Libraries (Keep as is) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/splitting@1.0.6/dist/splitting.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal@4.0.9/dist/scrollreveal.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+
+    <!-- Your Custom JavaScript -->
+    <script src="script.js"></script>
+
 </body>
 </html>

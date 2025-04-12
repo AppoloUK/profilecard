@@ -1,0 +1,495 @@
+/* ===== BASE & RESET ===== */
+:root {
+    /* UPDATED: Black & White Color Palette */
+    --bg-color: #000000; /* Black */
+    --text-color: #EAEAEA; /* Light Grey / Off-white */
+    --accent-color: #FFFFFF; /* White */
+    --secondary-accent: #AAAAAA; /* Mid Grey for hover/secondary */
+    --card-bg: rgba(25, 25, 25, 0.8); /* Dark semi-transparent grey */
+    --border-color: rgba(255, 255, 255, 0.15); /* Subtle white border */
+    --navbar-bg: rgba(10, 10, 10, 0.85); /* Very dark transparent navbar */
+    --navbar-height: 60px; /* Define navbar height */
+
+    /* Typography */
+    --font-primary: 'Poppins', sans-serif;
+    --font-secondary: 'Space Grotesk', sans-serif; /* For headlines */
+
+    /* Spacing & Sizes */
+    --content-max-width: 1100px;
+    --spacing-unit: 1rem;
+
+    /* Animation */
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+    scroll-behavior: smooth;
+    /* Add scroll-padding-top to offset fixed navbar */
+    scroll-padding-top: var(--navbar-height);
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Add padding top to body to prevent content overlap */
+    /* padding-top: var(--navbar-height); */
+    /* Note: scroll-padding-top on html is generally preferred */
+}
+
+/* Lenis smooth scroll styles (Keep as is) */
+html.lenis { height: auto; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ===== UTILITIES & GENERAL STYLING ===== */
+.content-wrapper {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 calc(var(--spacing-unit) * 2);
+}
+
+section {
+    padding: calc(var(--spacing-unit) * 6) 0;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Add margin-top to first section if not using scroll-padding */
+    /* &:first-of-type { margin-top: var(--navbar-height); } */
+}
+
+h1, h2, h3 {
+    font-family: var(--font-secondary);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-unit);
+    color: var(--accent-color); /* Make headings white */
+}
+
+h2.section-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    /* color: var(--accent-color); Keep white */
+    margin-bottom: calc(var(--spacing-unit) * 3);
+    text-align: center;
+    visibility: hidden; /* ScrollReveal */
+}
+
+a {
+    color: var(--text-color); /* Default link color */
+    text-decoration: none;
+    transition: color var(--transition-speed) ease;
+}
+
+a:hover, a:focus {
+    color: var(--secondary-accent); /* Grey hover */
+    /* Remove underline for cleaner look, rely on color change */
+    text-decoration: none;
+    outline: none; /* Optional: remove default focus outline if custom is added elsewhere */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Optional Scanline Overlay (Keep as is if used) */
+.scanline-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0) 50%, rgba(0,0,0,0.1) 50%);
+    background-size: 100% 3px;
+    opacity: 0.3; pointer-events: none; z-index: 100;
+}
+
+
+/* ===== NAVIGATION BAR ===== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--navbar-height);
+    background-color: var(--navbar-bg);
+    backdrop-filter: blur(10px); /* Glass effect */
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Add shadow on scroll (handled by JS) */
+.navbar.scrolled {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.nav-container {
+    max-width: var(--content-max-width);
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 calc(var(--spacing-unit) * 2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-family: var(--font-secondary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    transition: color var(--transition-speed) ease;
+}
+.nav-logo:hover, .nav-logo:focus {
+    color: var(--secondary-accent);
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing-unit) * 2);
+}
+
+.nav-item {
+    /* Styles applied to link */
+}
+
+.nav-link {
+    color: var(--text-color);
+    font-weight: 400;
+    padding: 5px 0; /* Add some vertical space */
+    position: relative;
+    transition: color var(--transition-speed) ease;
+}
+
+.nav-link::after { /* Underline effect on hover */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: width var(--transition-speed) ease;
+}
+
+.nav-link:hover, .nav-link:focus, .nav-link.active { /* Style for hover/active */
+    color: var(--accent-color);
+}
+.nav-link:hover::after, .nav-link:focus::after, .nav-link.active::after {
+    width: 100%;
+}
+
+/* Basic Mobile Nav Toggle - More JS needed for full functionality */
+.nav-toggle {
+    display: none; /* Hidden by default */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+.hamburger {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--accent-color);
+    position: relative;
+    transition: background-color 0.2s ease-in-out;
+}
+.hamburger::before,
+.hamburger::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: var(--accent-color);
+    left: 0;
+    transition: transform 0.2s ease-in-out;
+}
+.hamburger::before { top: -8px; }
+.hamburger::after { bottom: -8px; }
+
+
+/* ===== HERO SECTION ===== */
+#hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column; /* Stack content and scroll hint */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+     /* Adjust padding top if needed, considering navbar */
+    padding-top: var(--navbar-height);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ADDED: Profile Picture Styling */
+.profile-picture {
+    width: clamp(100px, 20vw, 150px); /* Responsive size */
+    height: clamp(100px, 20vw, 150px);
+    border-radius: 50%;
+    object-fit: cover; /* Prevents image stretching */
+    margin-bottom: calc(var(--spacing-unit) * 2);
+    border: 3px solid var(--border-color);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    opacity: 0; /* Hidden for GSAP animation */
+    transform: scale(0.8); /* Start smaller for animation */
+}
+
+h1.headline {
+    font-size: clamp(3.5rem, 10vw, 7rem); /* Slightly smaller if needed */
+    color: var(--accent-color);
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    .char { display: inline-block; visibility: hidden; }
+}
+
+.tagline {
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    color: var(--text-color); /* Use main text color */
+    font-weight: 300;
+    margin-bottom: calc(var(--spacing-unit) * 4);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* ADDED: Simple scroll hint */
+.hero-scroll-down {
+    position: absolute;
+    bottom: calc(var(--spacing-unit) * 2);
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--secondary-accent); /* Use grey */
+    opacity: 0; /* Fade in with GSAP */
+    animation: subtle-bounce 2.5s infinite ease-in-out 3s;
+    z-index: 3;
+}
+.hero-scroll-down svg {
+    width: 30px;
+    height: 30px;
+}
+.hero-scroll-down:hover {
+    color: var(--accent-color);
+}
+
+@keyframes subtle-bounce {
+    0%, 100% { transform: translateY(0) translateX(-50%); }
+    50% { transform: translateY(-8px) translateX(-50%); }
+}
+
+
+/* ===== ABOUT SECTION ===== */
+#about { text-align: center; }
+.about-text {
+    max-width: 700px; margin: 0 auto;
+    font-size: clamp(1rem, 2.5vw, 1.2rem); line-height: 1.8;
+    visibility: hidden; /* ScrollReveal */
+}
+
+/* ===== SKILLS SECTION ===== */
+#skills { text-align: center; }
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: calc(var(--spacing-unit) * 2);
+    max-width: 800px; margin: 0 auto;
+}
+.skill-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: calc(var(--spacing-unit) * 1.5);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
+    backdrop-filter: blur(5px);
+    visibility: hidden; /* ScrollReveal */
+}
+.skill-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-color);
+}
+.skill-icon {
+    width: 50px; height: 50px;
+    margin-bottom: var(--spacing-unit);
+    /* Icons are white from source, add subtle shadow */
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.2));
+    transition: filter var(--transition-speed) ease;
+}
+.skill-item:hover .skill-icon {
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+}
+.skill-name {
+    font-size: 0.9rem; font-weight: 600;
+    color: var(--text-color);
+}
+
+
+/* ===== PORTFOLIO SECTION ===== */
+#portfolio { overflow: hidden; }
+.portfolio-slider {
+    width: 100%; max-width: 900px; margin: 0 auto;
+    padding: calc(var(--spacing-unit) * 2) 0;
+    visibility: hidden; /* ScrollReveal */
+}
+.swiper-slide { display: flex; justify-content: center; align-items: center; }
+.portfolio-item {
+    background-color: var(--card-bg); border: 1px solid var(--border-color);
+    border-radius: 8px; padding: calc(var(--spacing-unit) * 1.5);
+    width: 95%; margin: 0 auto; backdrop-filter: blur(5px); text-align: left;
+}
+.video-container {
+    position: relative; width: 100%; aspect-ratio: 16 / 9;
+    margin-bottom: var(--spacing-unit); background-color: #111; /* Dark grey bg */
+    border-radius: 4px; overflow: hidden;
+}
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+.video-placeholder {
+    display: flex; align-items: center; justify-content: center;
+    width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);
+    color: var(--text-color); font-style: italic;
+}
+.portfolio-title {
+    font-size: 1.3rem; color: var(--accent-color); /* White title */
+    margin-bottom: calc(var(--spacing-unit) * 0.5);
+}
+.portfolio-description { font-size: 0.95rem; color: var(--text-color); opacity: 0.8; }
+
+/* Swiper Navigation/Pagination Styling */
+:root { /* Update Swiper theme colors */
+    --swiper-navigation-color: var(--accent-color); /* White */
+    --swiper-pagination-color: var(--accent-color); /* White */
+    --swiper-navigation-size: 30px;
+}
+.swiper-button-next, .swiper-button-prev {
+    transition: transform 0.2s ease, color 0.2s ease;
+    transform: scale(0.8);
+}
+.swiper-button-next:hover, .swiper-button-prev:hover {
+    color: var(--secondary-accent); /* Grey hover */
+    transform: scale(1);
+}
+.swiper-pagination-bullet { background-color: rgba(255, 255, 255, 0.4); } /* Semi-transparent white */
+.swiper-pagination-bullet-active { background-color: var(--accent-color); } /* White active */
+
+
+/* ===== CONTACT SECTION ===== */
+#contact { text-align: center; }
+.contact-links {
+    display: flex; justify-content: center; align-items: center; flex-wrap: wrap;
+    gap: calc(var(--spacing-unit) * 2); /* Reduced gap slightly */
+    margin-top: calc(var(--spacing-unit) * 2);
+}
+.contact-link {
+    display: inline-flex; align-items: center;
+    gap: calc(var(--spacing-unit) * 0.75);
+    padding: calc(var(--spacing-unit) * 0.8) calc(var(--spacing-unit) * 1.5);
+    background-color: transparent; /* Make transparent */
+    border: 1px solid var(--border-color);
+    border-radius: 50px; color: var(--text-color);
+    font-weight: 500; /* Slightly less bold */
+    transition: all var(--transition-speed) ease;
+    /* backdrop-filter: blur(5px); Removed, rely on border */
+    visibility: hidden; /* ScrollReveal */
+}
+.contact-link:hover, .contact-link:focus {
+    background-color: var(--accent-color); /* White background */
+    color: var(--bg-color); /* Black text */
+    border-color: var(--accent-color);
+    transform: translateY(-3px); /* Keep subtle lift */
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+    text-decoration: none;
+    outline: none;
+}
+.contact-icon {
+    width: 22px; /* Slightly smaller icon */
+    height: 22px;
+    /* Icons should be white from source */
+    filter: none; /* Ensure no filter is applied */
+    transition: filter var(--transition-speed) ease; /* Keep transition for potential future filter needs */
+}
+.contact-link:hover .contact-icon, .contact-link:focus .contact-icon {
+     /* Invert icon color to black on white background */
+     filter: invert(1);
+}
+
+
+/* ===== FOOTER ===== */
+.footer {
+    text-align: center; padding: calc(var(--spacing-unit) * 2) 0;
+    margin-top: calc(var(--spacing-unit) * 4); font-size: 0.85rem;
+    color: var(--secondary-accent); /* Use grey for footer text */
+    border-top: 1px solid var(--border-color);
+}
+.footer span#year { color: inherit; }
+
+
+/* ===== RESPONSIVENESS ===== */
+@media (max-width: 768px) {
+    :root {
+        --spacing-unit: 0.9rem;
+        --navbar-height: 55px; /* Slightly smaller navbar */
+    }
+    html { scroll-padding-top: var(--navbar-height); }
+    /* body { padding-top: var(--navbar-height); } */
+
+    section { padding: calc(var(--spacing-unit) * 5) 0; }
+
+    /* Mobile Nav Adjustments */
+    .nav-menu {
+        /* Basic mobile menu - hide for now, show toggle */
+        /* Requires JS to actually toggle visibility */
+        display: none;
+        /* Example: Positioned absolutely when active */
+        /* position: absolute; top: var(--navbar-height); left: 0; width: 100%;
+           background-color: var(--navbar-bg); flex-direction: column;
+           padding: var(--spacing-unit) 0; text-align: center; */
+    }
+    .nav-toggle { display: block; /* Show hamburger */ }
+    /* Add .active class via JS to show menu */
+    /* .nav-menu.active { display: flex; } */
+
+    .skills-grid { grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); }
+    .portfolio-slider { max-width: 100%; }
+    .contact-links { flex-direction: column; gap: calc(var(--spacing-unit) * 1.5); }
+    .contact-link { width: fit-content; margin: 0 auto; }
+}
+
+@media (max-width: 480px) {
+    :root { --spacing-unit: 0.8rem; }
+    h1.headline { font-size: clamp(3rem, 15vw, 4.5rem); }
+    .tagline { font-size: clamp(1rem, 4vw, 1.2rem); }
+    h2.section-title { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+    section { padding: calc(var(--spacing-unit) * 4) 0; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); gap: var(--spacing-unit); }
+    .skill-item { padding: var(--spacing-unit); }
+    .skill-icon { width: 40px; height: 40px; }
+    .portfolio-title { font-size: 1.1rem; }
+    .portfolio-description { font-size: 0.9rem; }
+    .swiper-button-next, .swiper-button-prev { display: none; }
+    .swiper-pagination { bottom: 5px !important; }
+    .footer { font-size: 0.75rem; }
+    .nav-menu { gap: calc(var(--spacing-unit) * 1.5); } /* Adjust gap if shown */
+}
